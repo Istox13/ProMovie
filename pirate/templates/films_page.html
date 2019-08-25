@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    
+<div class="container pt-5 mt-5">
+        <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-2 mt-3">
+          <span class="navbar-brand"></span>
+  
+            <button class="navbar-toggler" type="button"
+              data-toggle="collapse" data-target="#nextNav"
+              aria-controls="nextNav" aria-expanded="false" 
+              aria-label="Toggle navigation"> 
+              <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <!--div class="collapse navbar-collapse" id="nextNav">
+              <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="help" class="nav-link">Не нашли то что интересует?</a>
+                    </li>
+              </ul-->
+
+              <form method="GET">
+                <div class="md-form my-0">
+                  <input name="search" type="text" class="form-control mr-sm-2" placeholder="Поиск" aria-label="Поиск">
+                </div>
+              </form>
+            </div>
+        </nav>
+  
+        <section class="container text-center mb-4 px-3 pt-2">
+            {% for films in content %}
+                <div class="row wow fadeIn">
+                    {% for film in films %}
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card">
+                                <div class="view overlay">
+                                <img class="card-img-top" src="{{ film["poster"] }}" alt="">
+                                <a href="/pirate/{{ film["kinopoisk_id"] }}">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                                </div>
+                                <div class="card-body text-center">
+                                <h5>
+                                    <strong>
+                                    <a href="/pirate/{{ film["kinopoisk_id"] }}" class="dark-grey-text">
+                                        {{ film["title_ru"] }}
+                                        <!-- span class="badge badge-pill danger-color"></span -->
+                                    </a>
+                                    </strong>
+                                </h5>
+                                <a href="" class="grey-text">
+                                    <h5>{{ film["year"] }} год</h5>
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </section>
+  
+        <nav class="d-flex justify-content-center wow fadeIn">
+          <ul class="pagination pg-blue">
+            {% if page_link["first"] %}
+                <li class="page-item disabled">
+            {% else %}
+                <li class="page-item">
+            {% endif %}
+              <a href="/pirate/page{{ page_link["tek_page"] - 1 }}" class="page-link" aria-label="Previous">
+                <span aria-hider="true">&laquo;</span>
+              </a>
+            </li>
+
+            {% for n in page_link["n_pages"] %}
+                {% if n == page_link["current"] %}
+                <li class="page-item active">
+                {% else %}
+                <li class="page-item">
+                {% endif %}
+                    <a href="/pirate/page{{ n }}" class="page-link" aria-label="Previous">
+                        <span aria-hider="true">{{ n }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+  
+                {% if page_link["last"] %}
+                    <li class="page-item disabled">
+                {% else %}
+                    <li class="page-item">
+                {% endif %}
+                        <a href="/pirate/page{{ page_link["tek_page"] + 1 }}" class="page-link" aria-label="Previous">
+                        <span aria-hider="true">&raquo;</span>
+                        </a>
+                    </li>
+          </ul>
+        </nav>
+      </div>
+{% endblock %}

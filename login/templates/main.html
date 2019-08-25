@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Введите кинопоиск id</title>
+  <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
+</head>
+<body>
+  <div class="page">
+    <div class="form">
+      <form autocomplete="off" method="POST">
+        {% csrf_token %}
+        <div class="input">
+          <input type="text" name="search">
+        </div>
+        <button type="submit"><span>Перейти</span></button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

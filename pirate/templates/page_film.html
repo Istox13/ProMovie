@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <main class="mt-5 pt-4">
+        <div class="container dark-grey-text mt-5">
+            <section class="mt-5"> 
+                <div class="row wow fadeIn">
+                    <div class="col-sm-4 mb-4 text-center zoom">
+                        <img src="{{ film.material_data.poster }}" alt="" class="img-fluid">
+                    </div>
+                    <div class="col mb-4">
+                        <div class="p-4">
+                            <h1 class="">{{ film.title_ru }}</h1>
+                            <hr>
+                            <div class="mb-3">
+                                    {% for genre in film.material_data.genres %}
+                                        <a href="">
+                                            <span class="badge blue mr-1">{{genre}}</span>
+                                        </a>
+                                    {% endfor %}
+                            </div>
+                            <p class="lead font-weight-bold">
+                                Описание:
+                            </p>
+                            <p>
+                                {{ film.material_data.description }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <section>
+                <div class="mb-3">
+                    <iframe src="{{ film.iframe_url }}" frameborder="0" width=100% height=600px allowfullscreen ></iframe>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+{% endblock %}
